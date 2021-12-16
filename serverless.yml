@@ -1,0 +1,27 @@
+service: sls-demo
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+package:
+  individually: true
+
+custom:
+  webpack:
+    packager: yarn
+
+provider:
+  name: aws
+  region: eu-north-1
+  runtime: nodejs14.x
+
+functions:
+  hello:
+    handler: src/functions/hello.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /hello/
+
+
